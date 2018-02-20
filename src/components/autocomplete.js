@@ -17,13 +17,16 @@ class Autocomplete extends Component {
   }
 
   _onInputChange(value) {
-    let stateItems = this.state.items;
-    let size = 0;
+    let stateItems = [];
 
-    this.search.getItems(value).forEach((item) => {
-      size = stateItems.length;
-      stateItems.push(<AutocompleteItem key={size} value={item} />);
-    });
+    if (value) {
+      let size = 0;
+
+      this.search.getItems(value).forEach((item) => {
+        size = stateItems.length;
+        stateItems.push(<AutocompleteItem key={size} value={item} />);
+      });
+    }
 
     this.setState({
       items: stateItems
