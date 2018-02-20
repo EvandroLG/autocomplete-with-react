@@ -11,8 +11,7 @@ class Search {
       caseSensitive: false,
     });
 
-    const result = searcher.search(value);
-    console.log(result);
+    return searcher.search(value);
   }
 };
 
