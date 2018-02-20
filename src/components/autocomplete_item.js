@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AutocompleteItem extends Component {
   render() {
     return (
-      <li>{ this.props.value }</li>
+      <li onClick={ () => { this.props.onLiClick(this.props.value); } }>{ this.props.value }</li>
     )
   }
 };

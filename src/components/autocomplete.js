@@ -9,22 +9,33 @@ class Autocomplete extends Component {
     super(props);
 
     this.state = {
-      items: []
+      items: [],
+      value: ''
     };
 
     this.search = new Search();
-    this._onInputChange = debounce(this._onInputChange, 300);
+    this._updateItems = debounce(this._updateItems, 300);
   }
 
-  _onInputChange(value) {
+  onItemClick(value) {
+    this.setState({
+      items: [],
+      value: value
+    });
+  }
+
+  _updateItems(value) {
     let stateItems = [];
 
     if (value) {
-      let size = 0;
-
       this.search.getItems(value).forEach((item) => {
-        size = stateItems.length;
-        stateItems.push(<AutocompleteItem key={size} value={item} />);
+        let size = stateItems.length;
+        let props = {
+          value: item,
+          onLiClick: this.onItemClick.bind(this)
+        };
+
+        stateItems.push(<AutocompleteItem key={size} {...props} />);
       });
     }
 
@@ -33,17 +44,28 @@ class Autocomplete extends Component {
     });
   }
 
+  _onInputChange(value) {
+    this.setState({
+      value: value
+    });
+
+    this._updateItems(value);
+  }
+
+  _renderItems() {
+    return this.state.items.map((item) => {
+      return item;
+    });
+  }
+
   render() {
     return (
       <div>
-        <input type="text" id="autocomplete" onChange={ (e) => { this._onInputChange(e.target.value); } } />
+        <input type="text" value={this.state.value}
+         id="autocomplete" onChange={ (e) => { this._onInputChange(e.target.value); } } />
 
         <ul>
-          {
-            this.state.items.map((item) => {
-              return item;
-            })
-          }
+          { this._renderItems() }
         </ul>
       </div>
     )
