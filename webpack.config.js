@@ -1,10 +1,10 @@
-const path = require('path');
+const currentDir = process.cwd();
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: currentDir
   },
   module: {
     loaders: [{
@@ -20,6 +20,6 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: currentDir
   }
 };
