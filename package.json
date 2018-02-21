@@ -1,5 +1,5 @@
 {
-  "name": "inkitt_test",
+  "name": "autocomplete-with-react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -24,13 +24,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EvandroLG/gym-app.git"
+    "url": "git+https://github.com/EvandroLG/autocomplete-with-react.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EvandroLG/gym-app/issues"
+    "url": "https://github.com/EvandroLG/autocomplete-with-react/issues"
   },
-  "homepage": "https://github.com/EvandroLG/gym-app#readme"
+  "homepage": "https://github.com/EvandroLG/autocomplete-with-react#readme"
 }
