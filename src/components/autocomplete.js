@@ -66,7 +66,7 @@ class Autocomplete extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <input type="text" value={this.state.value} ref={ (input) => this.input = input }
          id="autocomplete" onChange={ (e) => { this._onInputChange(e.target.value); } } />
 
