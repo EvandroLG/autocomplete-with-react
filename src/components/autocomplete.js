@@ -48,8 +48,6 @@ class Autocomplete extends Component {
     this.setState({
       items: this.state.memoize[value] || []
     });
-
-    console.log(this.state.memoize);
   }
 
   _onInputChange(value) {
