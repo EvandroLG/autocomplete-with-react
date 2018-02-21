@@ -10,11 +10,16 @@ class Autocomplete extends Component {
 
     this.state = {
       items: [],
-      value: ''
+      value: '',
+      memoize: {}
     };
 
     this.search = new Search();
     this._updateItems = debounce(this._updateItems, 300);
+  }
+
+  componentDidMount() {
+    this.input.focus();
   }
 
   onItemClick(value) {
@@ -25,9 +30,9 @@ class Autocomplete extends Component {
   }
 
   _updateItems(value) {
-    let stateItems = [];
+    if (value && !this.state.memoize[value]) {
+      let stateItems = [];
 
-    if (value) {
       this.search.getItems(value).forEach((item) => {
         let size = stateItems.length;
         let props = {
@@ -36,12 +41,15 @@ class Autocomplete extends Component {
         };
 
         stateItems.push(<AutocompleteItem key={size} {...props} />);
+        this.state.memoize[value] = stateItems;
       });
     }
 
     this.setState({
-      items: stateItems
+      items: this.state.memoize[value] || []
     });
+
+    console.log(this.state.memoize);
   }
 
   _onInputChange(value) {
@@ -61,7 +69,7 @@ class Autocomplete extends Component {
   render() {
     return (
       <div>
-        <input type="text" value={this.state.value}
+        <input type="text" value={this.state.value} ref={ (input) => this.input = input }
          id="autocomplete" onChange={ (e) => { this._onInputChange(e.target.value); } } />
 
         <ul className="autocomplete-list">
